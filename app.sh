@@ -131,10 +131,10 @@ main() {
     while true; do #melakukan pengulangan program
         echo -e "${merah}===pilihlah opsi berikut untuk mengecek kesehatan sistem anda ====${reset}"
         echo -e "${kuning}(1).${reset} ${tebal}${biru}informasi sistem${reset}"
-        echo -e "${kuning}(2).${reset} ${tebal}${biru}penggunaan_CPU${reset}"
-        echo -e "${kuning}(3).${reset} ${tebal}${biru}penggunaan_memori${reset}"
-        echo -e "${kuning}(4).${reset} ${tebal}${biru}penggunaan_ruang_disk${reset}"
-        echo -e "${kuning}(5).${reset} ${tebal}${biru}mengecek_jaringan${reset}" 
+        echo -e "${kuning}(2).${reset} ${tebal}${biru}penggunaan CPU${reset}"
+        echo -e "${kuning}(3).${reset} ${tebal}${biru}penggunaan memori${reset}"
+        echo -e "${kuning}(4).${reset} ${tebal}${biru}penggunaan ruang_disk${reset}"
+        echo -e "${kuning}(5).${reset} ${tebal}${biru}mengecek jaringan${reset}" 
         echo -e "${kuning}(6).${reset} ${tebal}${biru}keluar dari program${reset}"
         read -p "$(echo -e "${tebal}${hijau}masukkan pilihan anda(1-6): ${reset}" )" pilihan
         #kondisi berjalan sesuai perintah yang di input
