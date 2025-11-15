@@ -14,10 +14,14 @@ penggunaan_CPU(){
     echo "$cpu_use"  #perintah untuk mengecek penggunaan CPU
 }
 
-#fungsi untuk pengecekan penggunaan_memori
+#fungsi untuk pengecekan penggunaan memori
 penggunaan_memori(){
     memori=$(free -h)
-    echo "$memori" #perintah untuk mengecek penggunaan_memori
+    echo "$memori" #perintah untuk mengecek penggunaan  memori
 }
 
-
+#fungsi untuk pengecekan penggunaan ruang disk
+penggunaan_ruang_disk(){
+    ruang_disk=$(df -h) #perintah untuk mengecek penggunaan penggunaan ruang disk
+    echo "$ruang_disk"
+}
