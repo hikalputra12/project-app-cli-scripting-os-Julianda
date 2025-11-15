@@ -25,3 +25,9 @@ penggunaan_ruang_disk(){
     ruang_disk=$(df -h) #perintah untuk mengecek penggunaan penggunaan ruang disk
     echo "$ruang_disk"
 }
+
+#fungsi untuk pengecekan jaringan
+mengecek_jaringan(){
+    jaringan=$(ss -tuln) #perintah untuk mengecek jaringan
+    echo "$jaringan"
+}
