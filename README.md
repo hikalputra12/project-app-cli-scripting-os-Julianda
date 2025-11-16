@@ -33,4 +33,4 @@ Setelah menjalankan `./app.sh`, Anda akan disajikan menu utama:
 4.  Pilih 6 untuk keluar dari program.
 
 ## 💻 Video Penjelasan Program dan Panduan Penggunaan
-anda bisa menonton videonya pada link berikut: [text](https://drive.google.com/file/d/1FMiDVe77YIvjz5u5EGfu8fckRvIbsqfW/view?usp=sharing)
+anda bisa menonton videonya pada link berikut: [link video penjelasan code](https://drive.google.com/file/d/1FMiDVe77YIvjz5u5EGfu8fckRvIbsqfW/view?usp=sharing)
