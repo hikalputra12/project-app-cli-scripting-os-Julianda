@@ -26,6 +26,9 @@ informasi_sistem(){
             echo -e "${kuning}laporan informasi sistem anda tersimpan di file laporan_kesehatan_sistem.txt, silakan periksa file tersebut ${reset}\n"
         elif [[ $jawaban == "n" || $jawaban == "N" ]]; then
             main
+        elif [ -z $jawaban ]; then
+            echo -e "${merah} input yang anda masukkan tidak boleh kosong ${reset}"
+            input_pilihan
         else
             echo -e "${merah}pilihan anda tidak valid silakan pilih (y/n)${reset}"
             input_pilihan
@@ -49,6 +52,9 @@ penggunaan_CPU(){
             echo -e "${kuning}laporan penggunaan CPU sistem anda tersimpan di file laporan_kesehatan_sistem.txt, silakan periksa file tersebut${reset}\n"
         elif [[ $jawaban == "n" || $jawaban == "N" ]]; then
             main
+        elif [ -z $jawaban ]; then
+            echo -e "${merah} input yang anda masukkan tidak boleh kosong ${reset}"
+            input_pilihan
         else
             echo -e "${merah}pilihan anda tidak valid silakan pilih (y/n)${reset}"
             input_pilihan
@@ -72,6 +78,9 @@ penggunaan_memori(){
             echo -e "${kuning} laporan penggunaan memori sistem anda tersimpan di file laporan_kesehatan_sistem.txt, silakan periksa file tersebut${reset}\n"
         elif [[ $jawaban == "n" || $jawaban == "N" ]]; then
             main
+        elif [ -z $jawaban ]; then
+            echo -e "${merah} input yang anda masukkan tidak boleh kosong ${reset}"
+            input_pilihan
         else
             echo -e "${merah}pilihan anda tidak valid silakan pilih (y/n)${reset}"
             input_pilihan
@@ -95,6 +104,9 @@ penggunaan_ruang_disk(){
             echo -e " ${kuning}laporan penggunaan ruang disk sistem anda tersimpan di file laporan_kesehatan_sistem.txt, silakan periksa file tersebut${reset}\n"
         elif [[ $jawaban == "n" || $jawaban == "N" ]]; then
             main
+        elif [ -z $jawaban ]; then
+            echo -e "${merah} input yang anda masukkan tidak boleh kosong ${reset}"
+            input_pilihan
         else
             echo -e "${merah}pilihan anda tidak valid silakan pilih (y/n)${reset}"
             input_pilihan
@@ -118,6 +130,9 @@ mengecek_jaringan(){
             echo -e "${kuning}laporan pengecekan jaringan sistem anda tersimpan di file laporan_kesehatan_sistem.txt, silakan periksa file tersebut${reset}\n"
         elif [[ $jawaban == "n" || $jawaban == "N" ]]; then
             main
+        elif [ -z $jawaban ]; then
+            echo -e "${merah} input yang anda masukkan tidak boleh kosong ${reset}"
+            input_pilihan
         else
             echo -e "${merah}pilihan anda tidak valid silakan pilih (y/n)${reset}"
             input_pilihan
@@ -129,7 +144,7 @@ mengecek_jaringan(){
 #fungsi main untuk pemilihan menjalankan seluruh program
 main() {
     while true; do #melakukan pengulangan program
-        echo -e "${merah}===pilihlah opsi berikut untuk mengecek kesehatan sistem anda ====${reset}"
+        echo -e "${cyan}===pilihlah opsi berikut untuk mengecek kesehatan sistem anda ====${reset}"
         echo -e "${kuning}(1).${reset} ${tebal}${biru}informasi sistem${reset}"
         echo -e "${kuning}(2).${reset} ${tebal}${biru}penggunaan CPU${reset}"
         echo -e "${kuning}(3).${reset} ${tebal}${biru}penggunaan memori${reset}"
@@ -137,30 +152,35 @@ main() {
         echo -e "${kuning}(5).${reset} ${tebal}${biru}mengecek jaringan${reset}" 
         echo -e "${kuning}(6).${reset} ${tebal}${biru}keluar dari program${reset}"
         read -p "$(echo -e "${tebal}${hijau}masukkan pilihan anda(1-6): ${reset}" )" pilihan
-        #kondisi berjalan sesuai perintah yang di input
-        case "$pilihan" in
-            "1")
-                informasi_sistem
-                ;;
-            "2")
-                penggunaan_CPU
-                ;;
-            "3")
-                penggunaan_memori
-                ;;
-            "4")
-                penggunaan_ruang_disk
-                ;;
-            "5") 
-                mengecek_jaringan
-                ;;
-            "6")
-                exit 0
-                ;;
-            *) 
-                echo -e "${merah} Pilihan anda tidak valid. silakan pilih angka 1-6"
-                ;;
-        esac 
+        #menambahkan data validasi untuk input yang kosong
+        if [ -z "$pilihan" ]; then
+            echo -e "${merah} input yang anda masukkan tidak boleh kosong ${reset}"
+        else
+            #kondisi berjalan sesuai perintah yang di input
+            case "$pilihan" in
+                "1")
+                    informasi_sistem
+                    ;;
+                "2")
+                    penggunaan_CPU
+                    ;;
+                "3")
+                    penggunaan_memori
+                    ;;
+                "4")
+                    penggunaan_ruang_disk
+                    ;;
+                "5") 
+                    mengecek_jaringan
+                    ;;
+                "6")
+                    exit 0
+                    ;;
+                *) 
+                    echo -e "${merah} Pilihan anda tidak valid. silakan pilih angka 1-6"
+                    ;;
+            esac 
+        fi
     done
 }
 main
