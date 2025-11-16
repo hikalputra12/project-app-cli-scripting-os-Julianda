@@ -14,7 +14,7 @@ echo -e "${cyan}===Program pengecekan Generator Laporan Kesehatan Sistem device 
 #fungsi untuk pengecekan informasi sistem 
 informasi_sistem(){ 
     sistem=$(uname -a) #perintah untuk informasi sistem seperti nama server, versi kernel,dll
-    echo -e "${biru}berikut merupakan informasi sistem anda\n${reset}"
+    echo -e "${hijau}berikut merupakan informasi sistem anda\n${reset}"
     echo "$sistem"
 
     #fungsi validasi ingin menyimpan hasil laporan
@@ -40,7 +40,7 @@ informasi_sistem(){
 #fungsi untuk pengecekan penggunaan CPU
 penggunaan_CPU(){
     cpu_use=$(top -bn1)
-    echo -e "${biru}berikut merupakan informasi penggunaan CPU sistem anda\n${reset}"
+    echo -e "${hijau}berikut merupakan informasi penggunaan CPU sistem anda\n${reset}"
     echo "$cpu_use"  #perintah untuk mengecek penggunaan CPU
 
     #fungsi validasi ingin menyimpan hasil laporan
@@ -65,8 +65,27 @@ penggunaan_CPU(){
 
 #fungsi untuk pengecekan penggunaan memori
 penggunaan_memori(){
+
+    #melakukan pengecekan penggunaan memori
+
+    #initialisasi nilai awal batas memori yang di pakai 
+    batas_ruang=90
+
+    #pengecekan ambang batas memori 
+    persentase_memori=$(free -h | awk '/Mem:/{ total=$2; used=$3; printf "%.0f",(used/total)*100}' )
+    #free -h yaitu perintah untuk mengecek penggunaan memori
+    #awk "/Mem:/{total=$2,used=$3 mengambil nilai yang ada kata Mem dan total memori pada kolom ke 2 (dan memasukkannya ke dalam variabel total ) dan memori terpakai pada kolom ketiga dan memasukkan ke variabel used
+    #printf "%.0f",(used/total)*100} melakukan operasi aritmatika untuk mendapatkan persentasenya dan melakukan pembulatan
+
+    if [  $persentase_memori -gt $batas_ruang ]; then
+        echo -e "pengguanan memori anda sekarang : ${merah}$persentase_memori% ${reset}"
+        echo -e "${merah}penggunaan memori anda di luar ambang batas penggunaan yang seharusnya ${hijau}$batas_ruang%${reset},${merah}mohon kurangi sebesar $(($persentase_memori - $batas_ruang))% agar menjaga kesehatan komputer anda${reset}"
+    else
+        echo -e "penggunaan memori anda berada pada batas aman : ${hijau}$persentase_memori%${reset}"
+    fi
+   
     memori=$(free -h)
-    echo -e "${biru}berikut merupakan informasi penggunaan memori sistem anda\n${reset}"
+    echo -e "${hijau}berikut merupakan informasi penggunaan memori sistem anda\n${reset}"
     echo "$memori" #perintah untuk mengecek penggunaan  memori
 
     #fungsi validasi ingin menyimpan hasil laporan
@@ -91,8 +110,26 @@ penggunaan_memori(){
 
 #fungsi untuk pengecekan penggunaan ruang disk
 penggunaan_ruang_disk(){
+
+    #melakukan pengecekan penggunaan ruang disk
+
+    #initialisasi nilai awal ruang disk 
+    batas_ruang=85
+
+    #pengecekan ambang batas
+    persentase_ruang_disk=$(df -h | awk 'NR==2 {print $5}' | sed 's/%//g')
+    #df -h yaitu perintah untuk mengecek penggunaan penggunaan ruang disk
+    #awk 'NR==2 {print $5}' mengambil nilai di baris 2 kolom ke 5
+    #sed 's/%//g' menghapus % dan menjadikannya nilai integer dengan pola sed 'variabel dari awk/pola_lama/pola_baru/flag'
+
+    if [  $persentase_ruang_disk -gt $batas_ruang ]; then
+        echo -e "pengguanan ruang disk anda sekarang : ${merah}$persentase_ruang_disk% ${reset}"
+        echo -e "${merah}penggunaan ruang disk anda di luar ambang batas penggunaan yang seharusnya ${hijau}$batas_ruang%${reset},${merah}mohon kurangi sebesar $(($persentase_ruang_disk - $batas_ruang))% agar menjaga kesehatan komputer anda${reset}"
+    else
+        echo -e "penggunaan ruang disk anda berada pada batas aman : ${hijau}$persentase_ruang_disk%${reset}"
+    fi
     ruang_disk=$(df -h) #perintah untuk mengecek penggunaan penggunaan ruang disk
-    echo -e "${biru}berikut merupakan informasi penggunaan ruang disk sistem anda\n${reset}"   
+    echo -e "${hijau}berikut merupakan informasi penggunaan ruang disk sistem anda\n${reset}"   
     echo "$ruang_disk"
     
     #fungsi validasi ingin menyimpan hasil laporan
@@ -118,7 +155,7 @@ penggunaan_ruang_disk(){
 #fungsi untuk pengecekan jaringan
 mengecek_jaringan(){
     jaringan=$(ss -tuln) #perintah untuk mengecek jaringan
-    echo -e "${biru}berikut merupakan informasi pengecekan jaringan anda\n${reset}"   
+    echo -e "${hijau}berikut merupakan informasi pengecekan jaringan anda\n${reset}"   
     echo "$jaringan"
 
     #fungsi validasi ingin menyimpan hasil laporan
